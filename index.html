@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
@@ -18,111 +18,83 @@
 <link rel="preload" href="assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/demo.js" defer></script>
 </head>
 <body>
 
-<header class="entete">
-  <div class="wrap">
-    <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 418 120" role="img" aria-label="Zyto"><title>Zyto</title><defs><linearGradient id="zg" x1="0" y1="0" x2="1" y2="1"><stop class="zyto-g1" offset="0" stop-color="#F4A825"/><stop class="zyto-g2" offset="1" stop-color="#E66E19"/></linearGradient></defs><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"><path d="M8 34v-16q0 -10 10 -10h16"/><path d="M112 34v-16q0 -10 -10 -10h-16"/><path d="M8 86v16q0 10 10 10h16"/><path d="M112 86v16q0 10 -10 10h-16"/></g><path d="M40 40h40l-40 40h40" fill="none" stroke="url(#zg)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><g fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M166 30h39.6l-39.6 60h39.6M226.0 30l21.6 31.2l21.6 -31.2M247.6 61.2v28.8M287.2 30h43.2M308.8 30v60"/><circle cx="379.6" cy="60.0" r="30.0"/></g></svg>
-    </div>
-    <span class="pastille">Bêta privée</span>
-  </div>
+<header class="top">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 418 120" role="img" aria-label="Zyto"><title>Zyto</title><defs><linearGradient id="zg" x1="0" y1="0" x2="1" y2="1"><stop class="zyto-g1" offset="0" stop-color="#F4A825"/><stop class="zyto-g2" offset="1" stop-color="#E66E19"/></linearGradient></defs><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"><path d="M8 34v-16q0 -10 10 -10h16"/><path d="M112 34v-16q0 -10 -10 -10h-16"/><path d="M8 86v16q0 10 10 10h16"/><path d="M112 86v16q0 10 -10 10h-16"/></g><path d="M40 40h40l-40 40h40" fill="none" stroke="url(#zg)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><g fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M166 30h39.6l-39.6 60h39.6M226.0 30l21.6 31.2l21.6 -31.2M247.6 61.2v28.8M287.2 30h43.2M308.8 30v60"/><circle cx="379.6" cy="60.0" r="30.0"/></g></svg>
+  <span class="badge">Bêta privée</span>
 </header>
 
 <main>
+  <section class="hero">
+    <div>
+      <h1>Le carnet personnel de vos bières</h1>
+      <p class="lead">Un scan suffit pour savoir quelle bière vous tenez. Regardez la démo ou prenez la main.</p>
+      <a class="cta" href="mailto:pop.tudor.pro@gmail.com?subject=Demande%20d'invitation%20%E2%80%94%20b%C3%AAta%20Zyto&amp;body=Bonjour%2C%0D%0A%0D%0AJe%20souhaite%20recevoir%20une%20invitation%20%C3%A0%20la%20b%C3%AAta%20priv%C3%A9e%20de%20Zyto.%0D%0AJe%20confirme%20avoir%2018%C2%A0ans%20ou%20plus.%0D%0A%0D%0APr%C3%A9nom%C2%A0%3A%0D%0AT%C3%A9l%C3%A9phone%20utilis%C3%A9%20(iPhone%20%2F%20Android)%C2%A0%3A">Demander une invitation</a>
+      <p class="fine">Bêta privée sur invitation pour les 18&nbsp;ans et plus</p>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="phone">
+        <div class="screen">
+          <div class="appbar"><span>Zyto</span><small>Démonstration</small></div>
+          <div class="scenes">
+            <div class="scene" id="s0"></div>
+            <div class="scene" id="s1"></div>
+            <div class="scene" id="s2"></div>
+            <div class="scene" id="s3"></div>
+          </div>
+        </div>
+      </div>
+      <ol class="steps" aria-label="Étapes de la démonstration">
+        <li><button data-go="0">Scanner</button></li>
+        <li><button data-go="1">Comprendre</button></li>
+        <li><button data-go="2">Noter</button></li>
+        <li><button data-go="3">Découvrir</button></li>
+      </ol>
+      <button class="replay" id="replay" hidden>Relancer la lecture automatique</button>
+    </div>
+  </section>
+
   <div class="wrap">
-
-    <section class="hero">
-      <div>
-        <p class="surtitre">Application web · Bêta privée en France</p>
-        <h1>Le carnet personnel de vos bières.</h1>
-        <p class="soustitre">Scannez un code-barres pour identifier une bière, lisez ce qu'elle est, notez-la pour vous seul et retrouvez des bières qui s'en rapprochent.</p>
-        <a class="bouton" href="mailto:pop.tudor.pro@gmail.com?subject=Demande%20d'invitation%20%E2%80%94%20b%C3%AAta%20Zyto&amp;body=Bonjour%2C%0D%0A%0D%0AJe%20souhaite%20recevoir%20une%20invitation%20%C3%A0%20la%20b%C3%AAta%20priv%C3%A9e%20de%20Zyto.%0D%0AJe%20confirme%20avoir%2018%C2%A0ans%20ou%20plus.%0D%0A%0D%0APr%C3%A9nom%C2%A0%3A%0D%0AT%C3%A9l%C3%A9phone%20utilis%C3%A9%20(iPhone%20%2F%20Android)%C2%A0%3A">Demander une invitation</a>
-        <p class="discret">Sur invitation · Réservée aux personnes de 18&nbsp;ans et plus</p>
-      </div>
-
-      <div class="fiche" role="img" aria-label="Exemple de fiche bière dans Zyto, avec des données fictives.">
-        <span class="fiche-nom">Bière d'exemple</span>
-        <span class="fiche-brasserie">Brasserie fictive</span>
-        <div class="fiche-ligne"><span>Style</span><span>Saison</span></div>
-        <div class="fiche-ligne"><span>Degré</span><span>6,5&nbsp;% vol.</span></div>
-        <div class="fiche-ligne"><span>Amertume</span><span>28&nbsp;IBU</span></div>
-        <div class="fiche-note"><span>Ma note</span><span>Visible par vous seul</span></div>
-      </div>
+    <section class="shelf">
+      <h2>Essayez avec une autre bière</h2>
+      <p class="sub">Touchez une bouteille pour relancer la démo.</p>
+      <div class="row" id="row"></div>
+      <p class="fict">Ces bières et ces brasseries sont inventées pour la démo.</p>
     </section>
 
-    <section class="section" aria-labelledby="benefices">
-      <h2 id="benefices">Ce que fait Zyto</h2>
-      <div class="benefices">
-        <div>
-          <h3>Identifier</h3>
-          <p>Un code-barres suffit pour retrouver une bière dans le catalogue. Si le code est inconnu, la recherche par nom prend le relais.</p>
-        </div>
-        <div>
-          <h3>Comprendre</h3>
-          <p>Style, degré d'alcool, amertume, brasserie d'origine&nbsp;: chaque fiche présente des informations factuelles, dont la provenance est conservée.</p>
-        </div>
-        <div>
-          <h3>Mémoriser en privé</h3>
-          <p>Notes, avis, favoris, liste d'envies et historique. Vos notes et vos avis ne sont visibles que par vous.</p>
-        </div>
-        <div>
-          <h3>Découvrir</h3>
-          <p>À partir d'une bière que vous connaissez, consultez celles qui s'en rapprochent par le style, le degré d'alcool et l'amertume.</p>
-        </div>
-      </div>
+    <section class="block">
+      <h2>Vos goûts ne regardent que vous</h2>
+      <ul>
+        <li>Vos notes et vos avis restent privés.</li>
+        <li>Cette page ne dépose aucun cookie et ne vous suit pas.</li>
+        <li>L'application ne géolocalise pas votre téléphone pendant la bêta.</li>
+        <li>La suppression de votre compte est immédiate et définitive.</li>
+        <li>Zyto ne vend pas d'alcool et ne diffuse aucune publicité.</li>
+      </ul>
     </section>
 
-    <section class="section" aria-labelledby="vie-privee">
-      <h2 id="vie-privee">Vos goûts ne regardent que vous.</h2>
-      <div>
-        <p class="intro">Zyto est conçu comme un carnet personnel, pas comme un réseau social.</p>
-        <ul class="liste">
-          <li>Vos notes et avis personnels restent privés.</li>
-          <li>Cette page n'utilise ni cookie, ni traceur, ni outil de mesure d'audience.</li>
-          <li>L'application n'utilise pas la géolocalisation de votre téléphone pendant la bêta.</li>
-          <li>Vous pouvez supprimer votre compte depuis l'application&nbsp;; la suppression est immédiate et définitive.</li>
-          <li>Zyto ne vend pas d'alcool et ne diffuse aucune publicité.</li>
-        </ul>
-        <a class="lien" href="mentions-legales.html#confidentialite">Lire la politique de confidentialité</a>
-      </div>
+    <section class="block">
+      <h2>Comment rejoindre la bêta</h2>
+      <ol>
+        <li><strong>Écrivez-nous.</strong> Un simple e-mail suffit.</li>
+        <li><strong>Recevez votre lien.</strong> Les invitations partent petit à petit.</li>
+        <li><strong>Ouvrez Zyto.</strong> Tout se passe dans le navigateur de votre téléphone sans rien installer.</li>
+      </ol>
+      <a class="cta" href="mailto:pop.tudor.pro@gmail.com?subject=Demande%20d'invitation%20%E2%80%94%20b%C3%AAta%20Zyto&amp;body=Bonjour%2C%0D%0A%0D%0AJe%20souhaite%20recevoir%20une%20invitation%20%C3%A0%20la%20b%C3%AAta%20priv%C3%A9e%20de%20Zyto.%0D%0AJe%20confirme%20avoir%2018%C2%A0ans%20ou%20plus.%0D%0A%0D%0APr%C3%A9nom%C2%A0%3A%0D%0AT%C3%A9l%C3%A9phone%20utilis%C3%A9%20(iPhone%20%2F%20Android)%C2%A0%3A">Demander une invitation</a>
+      <p class="fine">Votre adresse sert seulement à vous répondre. Vous ne recevrez aucune publicité.</p>
     </section>
-
-    <section class="section" aria-labelledby="beta">
-      <h2 id="beta">Comment rejoindre la bêta</h2>
-      <div>
-        <ol class="etapes">
-          <li><strong>Vous écrivez.</strong> Un e-mail suffit pour demander une invitation.</li>
-          <li><strong>Vous recevez un lien.</strong> Les invitations sont envoyées progressivement, en nombre limité.</li>
-          <li><strong>Vous ouvrez Zyto.</strong> L'application fonctionne dans le navigateur de votre téléphone, sans installation depuis un store.</li>
-        </ol>
-        <a class="bouton" href="mailto:pop.tudor.pro@gmail.com?subject=Demande%20d'invitation%20%E2%80%94%20b%C3%AAta%20Zyto&amp;body=Bonjour%2C%0D%0A%0D%0AJe%20souhaite%20recevoir%20une%20invitation%20%C3%A0%20la%20b%C3%AAta%20priv%C3%A9e%20de%20Zyto.%0D%0AJe%20confirme%20avoir%2018%C2%A0ans%20ou%20plus.%0D%0A%0D%0APr%C3%A9nom%C2%A0%3A%0D%0AT%C3%A9l%C3%A9phone%20utilis%C3%A9%20(iPhone%20%2F%20Android)%C2%A0%3A">Demander une invitation</a>
-        <p class="discret">Votre adresse sert uniquement à vous répondre. Aucune liste de diffusion, aucun e-mail promotionnel.</p>
-      </div>
-    </section>
-
   </div>
 </main>
 
-<footer class="pied">
-  <div class="wrap">
-    <p>Zyto — bêta privée, réservée aux personnes de 18&nbsp;ans et plus.</p>
-    <nav aria-label="Pied de page">
-      <ul>
-        <li><a href="mentions-legales.html#mentions">Mentions légales</a></li>
-        <li><a href="mentions-legales.html#confidentialite">Confidentialité</a></li>
-        <li><a href="mailto:pop.tudor.pro@gmail.com">Contact</a></li>
-      </ul>
-    </nav>
-    <p>Contact&nbsp;: <a href="mailto:pop.tudor.pro@gmail.com">pop.tudor.pro@gmail.com</a></p>
-    <p>© 2026 Tudor Vlad POP</p>
-  </div>
+<footer>
+  <p>Zyto est en bêta privée et s'adresse aux personnes de 18&nbsp;ans et plus.</p>
+  <p class="foot-links"><a href="mentions-legales.html#mentions">Mentions légales</a><a href="mentions-legales.html#confidentialite">Confidentialité</a><a href="mailto:pop.tudor.pro@gmail.com">Contact</a></p>
 </footer>
-
-<aside class="sanitaire" aria-label="Message sanitaire">
-  <p>L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</p>
-</aside>
+<div class="health" role="note" aria-label="Message sanitaire">L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</div>
 
 </body>
 </html>
