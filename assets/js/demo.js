@@ -1,5 +1,6 @@
 // Zyto — démonstration de la page d'accueil. Aucun stockage, aucune requête réseau.
 (function(){
+  document.documentElement.classList.add('js');
   // Catalogue de démonstration : tout est fictif.
   var B=[
     {id:'zeste',name:'Zeste Nord',brew:'Atelier Tournepierre',style:'IPA',abv:6.2,ibu:55,tags:['Agrumes','Résine','Pamplemousse'],glass:'#3b2414',cap:'#e9b23a',c1:'#f2e3c2',c2:'#d9641c',em:'sun',
@@ -82,7 +83,9 @@
   function rate(n,byUser){
     Array.prototype.forEach.call(scenes[2].querySelectorAll('[data-star]'),function(s){s.classList.toggle('lit',+s.dataset.star<=n)});
     $('.sub',scenes[2]).textContent=n+' sur 5';
-    later(function(){$('.saved',scenes[2]).classList.add('show')},byUser?250:500);
+    var saved=$('.saved',scenes[2]), show=function(){saved.classList.add('show')};
+    // Note donnée par l'utilisateur : minuterie hors de la liste annulable, le message s'affiche toujours.
+    if(byUser)setTimeout(show,250); else later(show,500);
   }
   function go(s){
     clearT(); step=s;

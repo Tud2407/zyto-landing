@@ -20,7 +20,7 @@
   color-scheme:dark;
   --bg:hsl(220 20% 7%); --fg:hsl(40 20% 92%); --primary:hsl(38 90% 55%); --primary-fg:hsl(220 20% 7%);
   --muted:hsl(220 10% 60%); --card:hsl(220 18% 11%); --raised:hsl(220 16% 16%); --border:hsl(220 15% 18%);
-  --gold:hsl(38 90% 55%); --amber:hsl(25 80% 50%); --h1-from:var(--gold); --h1-to:var(--amber);
+  --gold:hsl(38 90% 55%); --amber:hsl(25 80% 50%); --h1-from:var(--gold); --h1-to:var(--amber); --near:var(--primary);
   --success:hsl(145 55% 45%); --star:hsl(45 100% 60%); --shadow:hsl(220 40% 2%);
   --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
 }
@@ -29,7 +29,7 @@
     color-scheme:light;
     --bg:hsl(40 40% 96%); --fg:hsl(25 25% 13%); --primary:hsl(36 88% 47%); --primary-fg:hsl(26 35% 10%);
     --muted:hsl(28 12% 36%); --card:hsl(42 55% 99%); --raised:hsl(38 34% 93%); --border:hsl(36 22% 85%);
-    --gold:hsl(36 88% 45%); --amber:hsl(22 76% 44%); --h1-from:hsl(36 88% 40%); --h1-to:var(--amber);
+    --gold:hsl(36 88% 45%); --amber:hsl(22 76% 44%); --h1-from:hsl(36 88% 40%); --h1-to:var(--amber); --near:hsl(30 88% 36%);
     --success:hsl(148 52% 30%); --star:hsl(38 92% 44%); --shadow:hsl(30 25% 35%);
   }
 }
@@ -137,7 +137,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .near-item svg{flex:none;height:54px;width:auto}
 .near-item strong{display:block;font:600 .95rem var(--display)}
 .near-item span{display:block;font-size:.74rem;color:var(--muted)}
-.near-item em{display:block;font-style:normal;font-size:.74rem;color:var(--primary);margin-top:2px}
+.near-item em{display:block;font-style:normal;font-size:.74rem;color:var(--near);margin-top:2px}
 button.near-item:hover{border-color:var(--primary)}
 
 /* Étapes */
@@ -203,3 +203,7 @@ body:has(.page) main{flex:1}
 .pied{padding-left:0;padding-right:0}
 .pied ul{display:flex;flex-wrap:wrap;margin:0;padding:0;list-style:none}
 @media (forced-colors:active){.hero h1,.page h1,.appbar span{background:none;color:CanvasText}}
+
+/* Sans JavaScript : la fiche écrite en dur dans index.html reste seule visible */
+html:not(.js) .shelf,html:not(.js) .steps,html:not(.js) .replay,html:not(.js) .s-btn{display:none}
+html:not(.js) .gauge b{width:78.57%}
