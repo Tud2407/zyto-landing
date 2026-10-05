@@ -1,0 +1,513 @@
+/* Zyto — landing statique. Un seul fichier CSS, aucune ressource externe. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/space-grotesk-latin-wght-normal.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Thème : sombre par défaut ---------- */
+
+:root {
+  color-scheme: dark;
+  --background: 220 20% 7%;
+  --foreground: 40 20% 92%;
+  --primary: 38 90% 55%;
+  --primary-foreground: 220 20% 7%;
+  --muted-foreground: 220 10% 60%;
+  --card: 220 18% 11%;
+  --border: 220 15% 18%;
+  --gold: 38 90% 55%;
+  --amber: 25 80% 50%;
+  --h1-from: var(--gold);
+  --h1-to: var(--amber);
+  --radius: 0.75rem;
+  --gutter: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  --titres: "Space Grotesk", system-ui, sans-serif;
+  --texte: "Inter", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --background: 40 40% 96%;
+    --foreground: 25 25% 13%;
+    --primary: 36 88% 47%;
+    --primary-foreground: 26 35% 10%;
+    --muted-foreground: 28 12% 36%;
+    --card: 42 55% 99%;
+    --border: 36 22% 85%;
+    --gold: 36 88% 45%;
+    --amber: 22 76% 44%;
+    /* dégradé du h1 : gold assombri pour atteindre 3:1 sur le fond clair */
+    --h1-from: 36 88% 40%;
+    --h1-to: 22 76% 44%;
+  }
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* le focus clavier ne se retrouve pas sous le bandeau sanitaire */
+  scroll-padding-bottom: 6rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font: 400 1.0625rem/1.65 var(--texte);
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--titres);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 11vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  padding-bottom: 0.08em;
+  color: hsl(var(--h1-from));
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  h1 {
+    background: linear-gradient(135deg, hsl(var(--h1-from)), hsl(var(--h1-to)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (forced-colors: active) {
+  h1 {
+    background: none;
+    color: CanvasText;
+  }
+}
+
+h2 {
+  font-size: clamp(2rem, 7.5vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid hsl(var(--foreground));
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), 68rem);
+  margin-inline: auto;
+}
+
+.discret {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9375rem;
+}
+
+/* ---------- En-tête ---------- */
+
+.entete .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: hsl(var(--foreground));
+}
+
+.logo svg {
+  display: block;
+  height: 2rem;
+  width: auto;
+}
+
+.zyto-g1 {
+  stop-color: hsl(var(--gold));
+}
+
+.zyto-g2 {
+  stop-color: hsl(var(--amber));
+}
+
+.pastille {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 999px;
+  background: hsl(var(--card));
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  display: grid;
+  gap: 3.5rem;
+  padding-block: 2.5rem 5rem;
+}
+
+.surtitre {
+  margin-bottom: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.soustitre {
+  max-width: 34rem;
+  margin-block: 1.5rem 2rem;
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.5rem 1.6rem;
+  border-radius: var(--radius);
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bouton:hover {
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.3);
+}
+
+.bouton + .discret {
+  margin-top: 0.9rem;
+}
+
+/* Maquette de fiche bière : une page de carnet, données fictives */
+
+.fiche {
+  justify-self: center;
+  width: min(100%, 21rem);
+  padding: 1.75rem 1.5rem 1.5rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 1.5rem;
+  background: hsl(var(--card));
+  box-shadow: 0 2rem 3.5rem -2rem hsl(220 30% 4% / 0.55);
+  transform: rotate(-2deg);
+}
+
+.fiche-nom {
+  display: block;
+  font: 700 1.75rem/1.15 var(--titres);
+  letter-spacing: -0.02em;
+}
+
+.fiche-brasserie {
+  display: block;
+  margin-block: 0.25rem 1.25rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.fiche-ligne {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.6rem;
+  border-top: 1px dashed hsl(var(--border));
+  font-size: 0.9375rem;
+}
+
+.fiche-ligne span:first-child,
+.fiche-note span:last-child {
+  color: hsl(var(--muted-foreground));
+}
+
+.fiche-ligne span:last-child {
+  font-weight: 600;
+}
+
+.fiche-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 7.5rem;
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 1rem;
+  /* lignes de carnet */
+  background: repeating-linear-gradient(
+      transparent 0 1.7rem,
+      hsl(var(--border)) 1.7rem calc(1.7rem + 1px)
+    )
+    0 2.2rem no-repeat;
+  background-size: 100% 3.5rem;
+  font-size: 0.8125rem;
+}
+
+.fiche-note span:first-child {
+  font: 600 1rem var(--titres);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: 4.5rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.benefices {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.benefices p {
+  margin-top: 0.6rem;
+}
+
+.intro {
+  font-size: 1.1875rem;
+}
+
+.liste {
+  margin: 1.5rem 0;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 1.25rem;
+  background: hsl(var(--card));
+  list-style: none;
+}
+
+.liste li {
+  padding-block: 1rem;
+}
+
+.liste li + li {
+  border-top: 1px solid hsl(var(--border));
+}
+
+.lien {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+
+.etapes {
+  margin: 0 0 2.5rem;
+  padding-left: 2.25rem;
+}
+
+.etapes li {
+  padding-left: 0.5rem;
+}
+
+.etapes li + li {
+  margin-top: 1.75rem;
+}
+
+.etapes li::marker {
+  color: hsl(var(--muted-foreground));
+  font: 700 1.5rem var(--titres);
+}
+
+.etapes strong {
+  display: block;
+  font: 600 1.5rem/1.2 var(--titres);
+  letter-spacing: -0.02em;
+}
+
+.section .bouton + .discret {
+  max-width: 30rem;
+}
+
+/* ---------- Pages de texte (mentions légales, 404) ---------- */
+
+.page {
+  padding-block: 2.5rem 5rem;
+}
+
+.page h1 {
+  font-size: clamp(2.25rem, 8.5vw, 3.75rem);
+}
+
+.page > p {
+  margin-top: 1.5rem;
+}
+
+.texte {
+  max-width: 42rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.texte h2 {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+}
+
+.texte h3 {
+  margin-top: 2.5rem;
+  font-size: 1.25rem;
+}
+
+.texte p,
+.texte ul {
+  margin-block: 0.75rem 0;
+}
+
+.texte ul {
+  padding-left: 1.25rem;
+}
+
+.texte li + li {
+  margin-top: 0.6rem;
+}
+
+.texte a {
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Pied de page ---------- */
+
+.pied {
+  padding-block: 3rem;
+  border-top: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9375rem;
+}
+
+.pied ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pied li + li::before {
+  content: "·";
+  margin-inline: 0.75rem;
+}
+
+.pied a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: hsl(var(--foreground));
+}
+
+/* ---------- Bandeau sanitaire ----------
+   Collé en bas de l'écran (sticky sur le dernier enfant de body) : toujours
+   visible, et sa hauteur reste réservée dans le flux quelle que soit la taille
+   du texte, donc le contenu ne finit jamais dessous. */
+
+.sanitaire {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding: 0.7rem var(--gutter) calc(0.7rem + env(safe-area-inset-bottom));
+  border-top: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ---------- Écrans larges ---------- */
+
+@media (min-width: 48rem) {
+  .benefices {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem 3rem;
+  }
+}
+
+@media (min-width: 60rem) {
+  .hero {
+    grid-template-columns: 1.35fr 1fr;
+    align-items: center;
+    padding-block: 4rem 7rem;
+  }
+
+  .section {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    padding-block: 6.5rem;
+  }
+}
+
+/* ---------- Mouvement ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .bouton {
+    transition: box-shadow 0.15s ease-out;
+  }
+}
